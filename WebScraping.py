@@ -91,6 +91,7 @@ def extract_info(ville, codepostal):
 for list in prefecture:
     print(list[0], list[1])
     extract_info('x', list[1])
+    print(len(villes))
 
 print(villes)
 print(dates)
