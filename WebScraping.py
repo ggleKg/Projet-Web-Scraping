@@ -34,7 +34,6 @@ nebulosites = []
 
 def getUrl(ville, codepostal):
     url = "https://www.lameteoagricole.net/meteo-heure-par-heure/" + str(ville) +"-" + str(codepostal) + "000-j1.html"
-    #url = "https://www.lameteoagricole.net/index.php?communehome="+ str(codepostal) + "000"
     return url
 
 def extract_info(ville, codepostal):
@@ -67,6 +66,7 @@ def extract_info(ville, codepostal):
         ensoleillements.append(sunshine.text)
         # Températures:
         temp = indicDiv[1].find('span', attrs='fw-bold fs-4 text-warning')
+        #print(temp)
         temperatures.append(temp.text[:-1])  # [:-1] pour retirer le °
         tempR = indicDiv[1].find('span', attrs='fs-5 text-secondary noModal')
         temperatures_resentie.append(tempR.text[:-1])  # [:-1] pour retirer le °
@@ -89,10 +89,15 @@ def extract_info(ville, codepostal):
         nebulosite = indicDiv[5].find('span', attrs='fw-bold')
         nebulosites.append(nebulosite.text)
 
+#print("Nancy", 54100)
+#extract_info("Nancy",54100)
+
 for list in prefecture:
     print(list[0], list[1])
-    if list[1] == 54:
+    if int(list[1]) == 54:
         extract_info("Nancy",54100)
+    elif int(list[1]) == 97:
+        pass
     else :
         extract_info(list[0], list[1])
     print(len(villes))
