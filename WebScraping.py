@@ -1,6 +1,14 @@
 import requests
 from bs4 import BeautifulSoup
+from pymongo import MongoClient
+import datetime
 import pandas as pd
+
+client = MongoClient()
+client = MongoClient( 'localhost' , 27017 )
+
+DB = client.WebScrapingTestDB
+Collection = DB.Indicator
 
 prefecture = []
 
@@ -66,7 +74,6 @@ def extract_info(ville, codepostal):
         ensoleillements.append(sunshine.text)
         # Températures:
         temp = indicDiv[1].find('span', attrs='fw-bold fs-4 text-warning')
-        #print(temp)
         temperatures.append(temp.text[:-1])  # [:-1] pour retirer le °
         tempR = indicDiv[1].find('span', attrs='fs-5 text-secondary noModal')
         temperatures_resentie.append(tempR.text[:-1])  # [:-1] pour retirer le °
@@ -88,9 +95,22 @@ def extract_info(ville, codepostal):
         # Nébulosités:
         nebulosite = indicDiv[5].find('span', attrs='fw-bold')
         nebulosites.append(nebulosite.text)
-
-#print("Nancy", 54100)
-#extract_info("Nancy",54100)
+    Record = {
+        "ville": villes[-1],
+        "current-date": datetime.datetime.utcnow(),
+        "date": dates[-1],
+        "ensoleillement": ensoleillements[-1],
+        "temperature": temperatures[-1],
+        "temperature-ressentie": temperatures_resentie[-1],
+        "precipitations": precipitations[-1],
+        "probabilités": probabilites[-1],
+        "direction-vent": direction_vent[-1],
+        "vitesse-vent": vitesse[-1],
+        "vitesse-rafale": vitesse_rafale[-1],
+        "humitide": humidites[-1],
+        "nebulosite": nebulosites[-1]
+    }
+    record_id = DB.Indicator.insert_one(Record)
 
 for list in prefecture:
     print(list[0], list[1])
@@ -102,7 +122,8 @@ for list in prefecture:
         extract_info(list[0], list[1])
     print(len(villes))
 
-print(villes)
+
+"""print(villes)
 print(dates)
 print(ensoleillements)
 print(temperatures)
@@ -113,4 +134,4 @@ print(direction_vent)
 print(vitesse)
 print(vitesse_rafale)
 print(humidites)
-print(nebulosites)
+print(nebulosites)"""
