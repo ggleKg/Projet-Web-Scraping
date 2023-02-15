@@ -34,6 +34,7 @@ nebulosites = []
 
 def getUrl(ville, codepostal):
     url = "https://www.lameteoagricole.net/meteo-heure-par-heure/" + str(ville) +"-" + str(codepostal) + "000-j1.html"
+    #url = "https://www.lameteoagricole.net/index.php?communehome="+ str(codepostal) + "000"
     return url
 
 def extract_info(ville, codepostal):
@@ -90,7 +91,10 @@ def extract_info(ville, codepostal):
 
 for list in prefecture:
     print(list[0], list[1])
-    extract_info('x', list[1])
+    if list[1] == 54:
+        extract_info("Nancy",54100)
+    else :
+        extract_info(list[0], list[1])
     print(len(villes))
 
 print(villes)
