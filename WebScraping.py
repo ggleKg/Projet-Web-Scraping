@@ -111,6 +111,7 @@ def extract_info(ville, codepostal):
         "nebulosite": nebulosites[-1]
     }
     record_id = DB.Indicator.insert_one(Record)
+    print(record_id)
 
 for list in prefecture:
     print(list[0], list[1])
