@@ -4,6 +4,10 @@ from pymongo import MongoClient
 import datetime
 import pandas as pd
 
+"""
+Programme de WebScraping et d'insertion en BDD du site lameteoagricole.net
+"""
+
 client = MongoClient()
 client = MongoClient('localhost', 27017)
 
