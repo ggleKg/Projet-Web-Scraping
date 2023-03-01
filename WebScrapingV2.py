@@ -5,7 +5,7 @@ import datetime
 import pandas as pd
 
 """
-Programme de Jérémy LUCAS, Amine HADDAD, Matthieu SFEIR et Oumaima
+Programme de Oumaïma BOUNHAR, Amine HADDAD, Jérémy LUCAS et Matthieu SFEIR. 
 Programme de WebScraping et d'insertion sur BDD Mongo du site meteoblue.com
 """
 
