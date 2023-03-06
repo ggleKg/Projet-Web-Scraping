@@ -16,6 +16,7 @@ Ouverture BDD Local avec MongoDB
 client = MongoClient()
 client = MongoClient('localhost', 27017)
 DB = client.MeteoWebScrapingDB
+#DB = client.WebScrapingTestDB
 Collection = DB.Indicator
 
 """
